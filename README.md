@@ -4,4 +4,6 @@
 
 ## Team Members:
 
+* Kim, Haneul
 * Lim, Stanley Vincent 
+* Wong, Aaron Eldrich
