@@ -1,0 +1,171 @@
+<script type="text/javascript">
+    $(document).ready(function() {				
+        var items = new Array;
+        var source = "";
+        
+        $("#upload").click(function() {
+            var file = $("#file");
+
+            if (file.prop('files') && file.prop('files')[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    source = `<img src ="${e.target.result}">`;
+                }
+                reader.readAsDataURL(file.prop('files')[0]);
+            }
+
+            
+            $("#error").text("Image Uploaded.");
+            $("#error").css("color", "green");
+        });
+
+        $("#submit").click(function() 
+        {
+            var name = $("#name").val();
+            var description = $("#item").val();
+            var quantity = $("#quantity").val();
+            var empty = false;
+
+            if(name == "")
+            {
+                empty = true;
+                $("#name").css("border-color", "#B00000");
+            }
+            else 
+            {
+                $("#name").css("border-color", "#DDDDDD");
+            }
+
+            if(description == "")
+            {
+                empty = true;
+                $("#item").css("border-color", "#B00000");
+            }
+            else 
+            {
+                $("#item").css("border-color", "#DDDDDD");
+            }
+
+            if($("#file").val() == "" || source == "")
+            {
+                source = `<img src ="img/default.jpg">`;
+            }
+            else 
+            {
+                $("#file").css("border-color", "#DDDDDD");
+            }
+
+            if(quantity == "")
+            {
+                empty = true;
+                $("#quantity").css("border-color", "#B00000");
+            }
+            else 
+            {
+                $("#quantity").css("border-color", "#DDDDDD");
+            }
+
+
+            var quantity = parseInt($("#quantity").val());
+
+
+            function item (name,description,quantity,source) 
+            {
+                this.name = name;
+                this.description = description;
+                this.quantity = quantity;
+                this.file = source;
+            };
+            
+            if(empty == false) 
+            {
+                items.push(new item(name,description,quantity,source));
+
+                $("#list").html("");
+
+                console.log(items);
+
+                var total = 0;
+                
+                for(i = 0; i<items.length ; i++)
+                {
+                    $("#list").append("<div class = \"itemList\">"
+                                        + "<span class = imagecol>" + items[i].file + "</span>"
+                                        + "<span class = namecol>" + items[i].name + "</span>"
+                                        + "<span class = itemcol>" + items[i].description + "</span>"
+                                        + "<span><button class=\"options\">-</button></span>"
+                                        + "<span class = quantitycol>" + items[i].quantity + "</span>"
+                                        + "<span><button class=\"options\">+</button></span>"
+                                        + "<table><tr><td>"
+                                        + "<span><button class=\"options\">Edit</button></span></td></tr>"
+                                        + "<tr><td><span><button class=\"options\">Delete</button></span>"
+                                        + "</td></tr></table></div>");
+                    total += items[i].quantity;
+                }
+
+                $("#total").text(total);
+                $("#name").val("");
+                $("#item").val("");
+                $("#quantity").val("");
+                $("#file").val("");
+                $("#error").text("");
+            }
+            else
+            {
+                $("#error").text("Please fill required fields.");
+                $("#error").css("color", "#B0000");
+            }
+        });	
+    });
+</script>
+
+<div class = "body">
+    <div>
+        <h3>[Name of Inventory]</h3>
+        <p>[Description]</p>
+    </div>
+    <div id="form">
+        <table>
+            <tr>
+                <td colspan="4" style="border-bottom: 2px solid #aaa"><strong>Add Item</strong>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" name="name" id="name"></td>
+
+                <td><label for="file">Image</label></td>
+                <td><span><input type="file" name="file" id="file" accept="image/*"></span>
+                    <span><input type="button" name="upload" id="upload" value="Upload"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="item">Description</label></td>
+                <td><input type="text" name="item" id="item"></td>
+
+                <td><label for="quantity">Quantity</label></td>
+                <td><input type="number" name="quantity" id="quantity"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><p id="error"></p></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <center><button id="submit">Add</button></center>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="controls">
+        <div>
+            <h2 id="header">List of Items</h2>
+            <p>Total No. of Items: <span id="total">0</span></p>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="list">
+        </div>
+    </div>
+</div>

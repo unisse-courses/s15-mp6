@@ -1,0 +1,67 @@
+
+<div class="form-box">
+    <form class="input">
+        <h1><strong>Change Password</strong></h1><br>
+        <label for = "user">Old Password:</label>
+        <input type = "password" name="opw" id = "opw" placeholder = "Old Password"><br>
+
+        <label for="pw">New Password:</label>
+        <input type = "password" name = "pw" id = "pw" placeholder = "New Password">
+        
+        <label for="cpw">Confirm password:</label>
+        <input type="password" name="cpw" id="cpw" placeholder = "Confirm Password">
+
+        <p id="warning"></p>
+
+        <input type = "button" name = "submit" id = "submit" value = "Change">
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    function checkField(field, val) {
+        var valid = val;
+
+        if(field.val() == '') {
+            valid = false;
+            field.css('border-color', '#e887a4');
+            $("#warning").text("Fill-in missing information.");
+        } else {
+            field.css('border-color', 'green');
+        }
+
+        return valid;
+    }
+
+    function checkEqual(field1, field2, val) {
+        var valid = val;
+
+        if(field1.val() != field2.val() || field1.val() == '') {
+            valid = false;
+            field1.css('border-color', '#e887a4');
+            field2.css('border-color', '#e887a4');
+            $("#warning").text("Password does not match");
+        } else {
+            field1.css('border-color', 'green');
+            field2.css('border-color', 'green');
+        }
+
+        return valid;
+    }
+
+    $("#submit").click(function(){
+        var valid = true;
+        valid = checkField($("#opw"), valid);
+        valid = checkField($("#pw"), valid);
+        valid = checkField($("#cpw"), valid);
+
+        valid = checkEqual($("#pw"), $("#cpw"), valid);
+        
+        if(valid==true){
+            $("#warning").text("Password Successfully changed.");
+            $("#opw").val("");
+            $("#pw").val("");
+            $("#cpw").val("");
+        }
+    });
+</script>

@@ -1,0 +1,256 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+nav
+{
+    background-color: lightskyblue;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+}
+
+.navigation
+{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+
+.navigation li
+{
+    display: inline-block;
+}
+
+.navigation li a
+{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px 20px;
+    font-size: 15px;
+}
+
+.navigation li.active a
+{
+    border: 1px solid;
+}
+
+.navigation li a:hover
+{
+    border: 1px solid white;
+}
+
+.logo
+{
+    width: auto;
+    height: 80px;
+    float: left;
+}
+
+.row
+{
+    max-width: 1200px;
+    margin: auto;
+    background-color: #333;
+}
+
+.form-box{
+    width: 400px;
+    height: 570px;
+    position: relative;
+    margin: 5% auto;
+    background-color:rgba(255,255,255,0.8);
+    padding: 5px;
+}
+
+.input{
+    text-align:center;
+    top: 30px;
+    left: 50px;
+    position: relative;
+    width: 300px;
+    transition: .5s;
+}
+
+#name, #email, #password, #confirmPass{
+    text-align:center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+#submit,#login,#my_inventory{
+    width: 50%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #3360FF,#C5CFF2);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+#head{
+    left: 50px;
+}
+
+#welcome_my
+{
+    float: left;
+    padding-left: 20px;
+    margin: 0;
+    color: white;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+.inventory_image{
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.tables:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column{
+    float: left;
+    width: 16.666%;
+}
+
+.tutorial{
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-size: 25px; 
+    color: darkblue;
+    text-align: left;
+    padding: 0px 15px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+  }
+
+.body {
+    max-width: 1100px;
+    margin: auto;
+    font-size: 1em;
+    color: white;
+    text-align: center;
+}
+
+#form {
+    display: inline-block;
+    margin-top: 20px;
+    color: black;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 4px;
+    text-align: center;
+}
+
+#form td {
+    padding: 0px 8px;
+    height: 30px;
+}
+
+#form input {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-left: 4px;
+}
+
+#list {
+    color: black;
+}
+
+.itemList {
+    min-height: 150px;
+    background-color: #eee;
+    display: flex;
+    padding: 8px;
+    margin: 8px;
+    align-items: center;
+}
+
+.itemList img {
+    display: block;
+    margin: auto;
+    width: 150px;
+    max-height: 150px;
+}
+
+.imagecol{
+    width:auto;
+}
+
+.namecol {
+    width: 20%;
+}
+
+.itemcol {
+    width: 60%;
+}
+
+.quantitycol {
+    width: 10%;
+    text-align: center;
+    font-weight: 700;
+}
+
+.error {
+    margin: 0;
+    padding: 0;
+    color:rgb(168, 5, 5);
+    font-weight: 700;
+}
+
+.success {
+    margin: 0;
+    padding: 0;
+    color: rgb(1, 196, 1);
+    font-weight: 700;
+}
+
+#grid_container {
+    display: grid;
+    grid-template:  none/auto auto auto auto;
+    grid-gap: 10px;
+    background-color: darkslategray;
+    padding: 10px;
+}
+
+#options {
+    color:black;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    float: right;
+}
+
+.inventory_name {
+    float:left;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Shareventory</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/background.jpg");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+  </head>
+  <body>
+    {{> nav1}}
+
+    <div class="container">
+      {{{ body }}}
+    </div>
+
+    {{> footer}} 
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<div class="form-box">
+    <form class="input" action="/register" method="POST">
+        <h1>Registration</h1>
+        <label for = "name"> Name: </label>
+        <input name="name" type = "text" id = "name" placeholder = "Name"> <br>
+
+        <label for = "email"> Email: </label>
+        <input name="email" type = "email" id = "email" placeholder = "Email"> <br>
+
+        <label for="password"> Password: </label>
+        <input name="password" type="password" id="password" placeholder = "Password"> <br>
+
+        <label for="confirmPass"> Confirm password: </label>
+        <input name="confirmPass" type="password" id="confirmPass" placeholder = "Confirm Password">
+
+        <br>
+        {{> messages}}
+        <br>
+
+        <button name = "submit" id = "submit" value = "Register">Register</button>
+        <br>
+        <p>Already have an account?</p>
+        <br>
+        <p><a href="/register">Register</a>!</p>
+    </form>
+</div>

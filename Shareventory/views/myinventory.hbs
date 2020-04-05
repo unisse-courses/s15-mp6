@@ -1,0 +1,114 @@
+<script type="text/javascript">
+    $(document).ready(function() {				
+        var inventories = new Array;
+        var source = "";
+        
+        $("#upload").click(function() {
+            var file = $("#file");
+
+            if (file.prop('files') && file.prop('files')[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    source = `<img src ="${e.target.result}">`;
+                }
+                reader.readAsDataURL(file.prop('files')[0]);
+            }
+
+            $("#error").text("Image Uploaded.");
+            $("#error").css("color", "green");
+        });
+
+
+        $("#submit").click(function() 
+        {
+            var name = $("#name").val();
+            var empty = false;
+
+            console.log(name);
+
+            if(name == "")
+            {
+                empty = true;
+                $("#name").css("border-color", "#B00000");
+            }
+            else 
+            {
+                $("#name").css("border-color", "#DDDDDD");
+            }
+
+            if($("#file").val() == "" || source == "")
+            {
+                source = `"img/default.jpg"`;
+            }
+            else 
+            {
+                $("#file").css("border-color", "#DDDDDD");
+            }
+
+            function inventory (name,source) 
+            {
+                this.name = name;
+                this.file = source;
+            };
+            
+            if(empty == false) 
+            {
+                inventories.push(new inventory(name,source));
+
+                $("#grid_container").html("");
+
+                console.log(inventories);
+
+                for(i = 0; i<inventories.length ; i++)
+                {
+                    $("#grid_container").append("<div class = \"inventory\">"
+                                            +   "<table><tr>"
+                                            +   "<th colspan = \"2\"><a href = \"itemlist\"><input type=\"image\" src=" + inventories[i].file + " class=\"inventory_image\" alt=\"Submit\" ></a></th>"
+                                            +   "</tr><tr>"
+                                            +   "<td class=\"inventory_name\">" + inventories[i].name + "</td>"     
+                                            +   "<td><button id=\"options\">...</button></td>"
+                                            +   "</tr></table></div>");                                              
+                }
+
+                $("#name").val("");
+                $("#inventory").val("");
+                $("#file").val("");
+            }
+            else
+            {
+                $("#error").text("Please fill required fields.");
+                $("#error").css("color", "#B0000");
+            }
+        });	
+    });
+</script>
+
+<div class="body">
+    <div id="form">
+        <table>
+            <tr>
+                <td colspan="4" style="border-bottom: 2px solid #aaa"><strong>Add Inventory</strong>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" name="name" id="name"></td>
+            <tr>
+                <td><label for="file">Image</label></td>
+                <td><span><input type="file" name="file" id="file" accept="image/*"></span>
+                    <span><input type="button" name="upload" id="upload" value="Upload"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><p id="error"></p></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <center><button id="submit">Add</button></center>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="grid_container">
+    </div>
+</div>

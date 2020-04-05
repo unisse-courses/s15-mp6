@@ -1,0 +1,115 @@
+const express = require('express');
+const path = require('path');
+const exphbs = require('express-handlebars');
+const handlebars = require('handlebars');
+const bodyParser = require('body-parser');
+const mongoose = require('./models/connection');
+const session = require('express-session');
+const flash = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
+
+const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
+
+const app = express();
+const port = 9090;
+
+
+app.listen(port, ()=>{
+    console.log('Server started at port ' + port);
+});
+
+app.set('views', path.join(__dirname, "/views/"));
+
+app.engine("hbs", exphbs({
+    extname: "hbs",
+    defaultLayout: "main1",
+    layoutsDir: path.join(__dirname, '/views/layouts'),
+    partialsDir: path.join(__dirname, '/views/partials')
+}));
+
+app.set("view engine", "hbs");
+
+app.use(express.static('public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(session({
+    secret: 'somegibberishsecret',
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 }
+  }));
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+});
+
+app.use('/', authRouter); // Login/registration routes
+app.use('/', indexRouter); // Main index route
+
+// Login route
+app.get('/', function(req, res) {
+    res.render('login', {
+        layout: 'main1',
+        title: 'Welcome!',
+    })
+});
+
+// Register route
+app.get('/register', function(req, res) {
+    res.render('register', {
+        layout: 'main1',
+        title: 'Register',
+    })
+});
+
+
+// Search route
+app.get('/search', function(req, res) {
+    res.render('search', {
+        layout: 'main2',
+        title: 'Search',
+    })
+});
+
+// My Inventory route
+app.get('/myinventory', function(req, res) {
+    res.render('myinventory', {
+        layout: 'main2',
+        title: 'My Inventory',
+    })
+});
+
+// Shared Inventory route
+app.get('/sharedinventory', function(req, res) {
+    res.render('sharedinventory', {
+        layout: 'main2',
+        title: 'Shared Inventory',
+    })
+});
+
+// Settings route
+app.get('/settings', function(req, res) {
+    res.render('settings', {
+        layout: 'main2',
+        title: 'Settings',
+    })
+});
+
+// Item List route
+app.get('/itemlist', function(req, res) {
+    res.render('itemlist', {
+        layout: 'main2',
+        title: 'Item List',
+    })
+});
+
