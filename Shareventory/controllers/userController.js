@@ -52,10 +52,7 @@ exports.loginUser = (req, res) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
-    const {
-      email,
-      password
-    } = req.body;
+    const { email, password } = req.body;
   
     userModel.getOne({ email: email }, (err, user) => {
       if (err) {
@@ -104,5 +101,57 @@ exports.logoutUser = (req, res) => {
       res.clearCookie('connect.sid');
       res.redirect('/login');
     });
+  }
+};
+
+exports.changePass = (req, res) => {
+
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) {
+    const { oldPass, password } = req.body;
+  
+    userModel.getById(req.session.user, (err, user) => {
+      if (err) {
+        // Database error occurred...
+        req.flash('error_msg', 'Something happened! Please try again.');
+        res.redirect('/settings');
+      } else {
+        // Successful query
+        bcrypt.compare(oldPass, user.password, (err, result) => {
+          // passwords match (result == true)
+          if (result) {
+            // Update user password once matched!
+            const saltRounds = 10;
+
+            // Hash password
+            bcrypt.hash(password, saltRounds, (err, hashed) => {
+              const newPass = hashed;
+              
+              //Update Password
+              userModel.updatePass(req.session.user, newPass, (err, user) => {
+                if (err) {
+                  // Database error occurred...
+                  req.flash('error_msg', '2Something happened! Please try again.');
+                  res.redirect('/settings');
+                } else {
+                  req.flash('success_msg', 'Successfully changed password.');
+                  res.redirect('/settings');
+                }
+              });
+            });
+          } else {
+            // passwords don't match
+            req.flash('error_msg', 'Incorrect password. Please try again.');
+            res.redirect('/settings');
+          }
+        });
+      }
+    });
+  } else {
+    const messages = errors.array().map((item) => item.msg);
+  
+    req.flash('error_msg', messages.join(' '));
+    res.redirect('/settings');
   }
 };

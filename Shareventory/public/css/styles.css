@@ -76,7 +76,7 @@ nav
     transition: .5s;
 }
 
-#name, #email, #password, #confirmPass{
+#name, #email, #password, #confirmPass, #oldPass{
     text-align:center;
     width: 100%;
     padding: 10px 0;

@@ -56,21 +56,7 @@ app.use((req, res, next) => {
 app.use('/', authRouter); // Login/registration routes
 app.use('/', indexRouter); // Main index route
 
-// Login route
-app.get('/', function(req, res) {
-    res.render('login', {
-        layout: 'main1',
-        title: 'Welcome!',
-    })
-});
 
-// Register route
-app.get('/register', function(req, res) {
-    res.render('register', {
-        layout: 'main1',
-        title: 'Register',
-    })
-});
 
 
 // Search route

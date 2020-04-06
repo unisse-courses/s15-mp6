@@ -6,14 +6,12 @@ const options = { useNewUrlParser: true,
   useFindAndModify: false };
 
 mongoose.connect(databaseURL, options, (error)=>{
-    if(!error)
-        {
-            console.log("Success Connected");
-        }
-    else
-        {
-            console.log("Error Connecting to database.");
-        } 
+    if(!error){
+        console.log("Success Connected");
+    }
+    else{
+        console.log("Error Connecting to database.");
+    } 
 });
 
 module.exports = mongoose;

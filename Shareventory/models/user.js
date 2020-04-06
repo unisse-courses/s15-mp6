@@ -18,6 +18,13 @@ exports.create = function(obj, next) {
   });
 };
 
+exports.updatePass = function(id, newPass, next) {
+  User.findOneAndUpdate({_id: id}, {password: newPass}, function(err, user) {
+    console.log(user.name);
+    next(err, user);
+  });
+};
+
 exports.getById = function(id, next) {
   User.findById(id, function(err, user) {
     next(err, user);

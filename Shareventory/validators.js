@@ -22,12 +22,29 @@ const registerValidation = [
 ];
 
 const loginValidation = [
-    // Email should not be empty and must be a valid email
-    body('email').not().isEmpty().withMessage("Email is required.")
-      .isEmail().withMessage("Please provide a valid email."),
-    // Password should not be empty and needs to be min 6 chars
-    body('password').not().isEmpty().withMessage("Password is required.")
-  ];
+  // Email should not be empty and must be a valid email
+  body('email').not().isEmpty().withMessage("Email is required.")
+    .isEmail().withMessage("Please provide a valid email."),
+  // Password should not be empty and needs to be min 6 chars
+  body('password').not().isEmpty().withMessage("Password is required.")
+];
+
+const changePassValidation = [
+  // Password needs to be min 6 chars
+  body('oldPass').not().isEmpty().withMessage("Old Password is required."),
+
+  // Password needs to be min 6 chars
+  body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long."),
+
+  // Confirm Password needs to be min 6 chars AND must match the req.body.password field
+  body('confirmPass').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long.")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords must match.");
+      }
+      return true;
+    })
+];
   
-module.exports = { registerValidation, loginValidation };
+module.exports = { registerValidation, loginValidation, changePassValidation };
 
