@@ -53,49 +53,5 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/', authRouter); // Login/registration routes
+app.use('/', authRouter); // Login/registration/settings routes
 app.use('/', indexRouter); // Main index route
-
-
-
-
-// Search route
-app.get('/search', function(req, res) {
-    res.render('search', {
-        layout: 'main2',
-        title: 'Search',
-    })
-});
-
-// My Inventory route
-app.get('/myinventory', function(req, res) {
-    res.render('myinventory', {
-        layout: 'main2',
-        title: 'My Inventory',
-    })
-});
-
-// Shared Inventory route
-app.get('/sharedinventory', function(req, res) {
-    res.render('sharedinventory', {
-        layout: 'main2',
-        title: 'Shared Inventory',
-    })
-});
-
-// Settings route
-app.get('/settings', function(req, res) {
-    res.render('settings', {
-        layout: 'main2',
-        title: 'Settings',
-    })
-});
-
-// Item List route
-app.get('/itemlist', function(req, res) {
-    res.render('itemlist', {
-        layout: 'main2',
-        title: 'Item List',
-    })
-});
-

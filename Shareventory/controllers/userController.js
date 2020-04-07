@@ -32,7 +32,7 @@ exports.registerUser = (req, res) => {
               res.redirect('/register');
               // res.status(500).send({ message: "Could not create user"});
             } else {
-              req.flash('success_msg', 'You are now registered! Login below.');
+              req.flash('success_msg', 'You are now registered! Login now.');
               res.redirect('/login');
             }
           });

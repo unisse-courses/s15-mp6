@@ -76,7 +76,7 @@ nav
     transition: .5s;
 }
 
-#name, #email, #password, #confirmPass, #oldPass{
+.form-box input{
     text-align:center;
     width: 100%;
     padding: 10px 0;
@@ -159,7 +159,7 @@ footer {
 
 #form {
     display: inline-block;
-    margin-top: 20px;
+    margin: auto;
     color: black;
     background-color: #eee;
     border-radius: 10px;
@@ -177,6 +177,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding-left: 4px;
+    
 }
 
 #list {
