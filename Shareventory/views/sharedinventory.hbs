@@ -1,0 +1,26 @@
+<br>
+<div class="body">
+    <div id="grid_container">
+        {{#if inventories}}
+            {{#each inventories}}
+                <div class = "inventory" id=>
+                    <table>
+                        <tr>
+                            <th colspan = "2">
+                                <form action = "/shareditemlist" method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <input type="image" src="img/default.jpg" class="inventory_image" alt="Submit" >
+                                </form>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="inventory_name">{{ this.name }}</td>  
+                        </tr>
+                    </table>
+                </div>
+            {{/each}} 
+        {{else}}
+            <p>No inventories yet</p>
+        {{/if}}
+    </div>
+</div>

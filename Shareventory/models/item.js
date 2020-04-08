@@ -29,3 +29,15 @@ exports.getOne = function(query, next) {
         next(err, item);
     });
 };
+
+exports.updateOne = function(id, updatedItem, next) {
+    Item.findOneAndUpdate({_id: id}, { name: updatedItem.name, description: updatedItem.description, quantity: updatedItem.quantity }, function(err, item) {
+        next(err, item);
+    });
+};
+
+exports.deleteOne = function(id, next) {
+    Item.deleteOne({_id: id}, function(err,res) {
+        next(err, res);
+    });
+};

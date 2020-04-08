@@ -95,7 +95,7 @@ nav
     cursor: pointer;
     display: block;
     margin: auto;
-    background: linear-gradient(to right, #3360FF,#C5CFF2);
+    background: rgb(140, 163, 247);
     border: 0;
     outline: none;
     border-radius: 30px;
@@ -240,18 +240,24 @@ footer {
     padding: 10px;
 }
 
-#options {
+.options {
     color:black;
-    padding: 5px 10px;
+    padding: 5px 5px;
     cursor: pointer;
-    display: block;
-    margin: auto;
-    border: 0;
+    border: 1px solid black;
     outline: none;
-    border-radius: 30px;
+    border-radius: 10px;
     float: right;
+    background-color: rgb(212, 212, 13);
 }
 
 .inventory_name {
     float:left;
+}
+
+.inventory {
+    border: 1px solid;
+    border-color: black;
+    padding: 5px 5px;
+    max-width: 265px;
 }

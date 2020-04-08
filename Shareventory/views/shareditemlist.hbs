@@ -1,0 +1,31 @@
+<div class = "body">
+    <div>
+        <h3>{{ name }}</h3>
+        <p>{{ description }}</p>
+        <br>
+    </div>
+
+    <div id="controls">
+        <div>
+            <h2 id="header">List of Items</h2>
+            <p>Total No. of Items: <span id="total">{{ total }}</span></p>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="list">
+            {{#if items}}
+                {{#each items}}
+                    <div class = "itemList">
+                        <span class = 'imagecol'><image src='img/default.jpg'></span>
+                        <span class = 'namecol'>{{ this.name }}</span>
+                        <span class = 'itemcol'>{{ this.description }}</span>
+                        <span class = 'quantitycol'>{{ this.quantity }}</span>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p>No items yet</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

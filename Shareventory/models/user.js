@@ -1,5 +1,4 @@
 const mongoose = require('./connection');
-const inventoryModel = require('../models/inventory');
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -48,5 +47,23 @@ exports.addInventory = function(id, inventory, next) {
 exports.checkInventory = function(id, name, next) {
   User.find({$elemMatch: {_id: id, inventories: {name: name}}}, function(err, user) {
       next(err, user);
+  });
+};
+
+exports.deleteInventory = function(id, inventoryId, next) {
+  User.findOneAndUpdate({_id: id}, { $pull: { inventories: {_id: inventoryId} } }, function(err, user) {
+    next(err, user);
+  });
+};
+
+exports.addSharedInventory = function(id, inventory, next) {
+  User.findOneAndUpdate({_id: id}, { $push: {shared: inventory} }, function(err, user) {
+    next(err, user);
+  });
+};
+
+exports.deleteSharedInventory = function(inventoryId, next) {
+  User.updateMany({shared: {_id: inventoryId}}, { $pull: { shared: {_id: inventoryId} } }, function(err, user) {
+    next(err, user);
   });
 };

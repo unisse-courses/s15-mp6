@@ -1,0 +1,24 @@
+<br>
+<div class = "body">
+    <form id="form" action="/shareInventory" method="POST">
+        <table>
+            <tr>
+                <td colspan="4" style="border-bottom: 2px solid #aaa"><strong>Share {{ name }} to:</strong>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input type="email" name="email" id="email"></td>
+            </tr>
+            <tr>
+                <td colspan="4">{{> messages}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ inventoryId }}'>
+                    <button name = "submit" id = "submit" value = "Share">Share</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

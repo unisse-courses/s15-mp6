@@ -19,8 +19,8 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="item">Description</label></td>
-                <td><input type="text" name="item" id="item"></td>
+                <td><label for="description">Description</label></td>
+                <td><input type="text" name="description" id="description"></td>
 
                 <td><label for="quantity">Quantity</label></td>
                 <td><input type="number" name="quantity" id="quantity"></td>
@@ -39,7 +39,6 @@
     <div id="controls">
         <div>
             <h2 id="header">List of Items</h2>
-            <p>Total No. of Items: <span id="total">{{ total }}</span></p>
         </div>
     </div>
 
@@ -51,15 +50,19 @@
                         <span class = 'imagecol'><image src='img/default.jpg'></span>
                         <span class = 'namecol'>{{ this.name }}</span>
                         <span class = 'itemcol'>{{ this.description }}</span>
-                        <span><button class="options">-</button></span>
                         <span class = 'quantitycol'>{{ this.quantity }}</span>
-                        <span><button class="options">+</button></span>
                         <table>
                             <tr>
-                                <td><span><button class="options">Edit</button></span></td>
+                                <td><form action='/edititem' method='POST'>
+                                    <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
+                                    <span><button class="options" name='Edit'>Edit</button></span>
+                                </form></td>
                             </tr>
                             <tr>
-                                <td><span><button class="options">Delete</button></span></td>
+                                <td><form action='/deleteitem' method='POST'>
+                                    <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
+                                    <span><button class="options" name='Delete'>Delete</button></span>
+                                </form></td>
                             </tr>
                         </table>
                     </div>

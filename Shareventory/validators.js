@@ -46,17 +46,22 @@ const changePassValidation = [
     })
 ];
 
-const addInventoryValidation = [
+const inventoryValidation = [
   //Name should not be empty
   body('name').not().isEmpty().withMessage("Name is required.")
 ];
 
-const addItemValidation = [
+const itemValidation = [
   //Name should not be empty
   body('name').not().isEmpty().withMessage("Name is required."),
   //Quantity should not be empty
   body('quantity').not().isEmpty().withMessage("Quantity is required.")
 ];
+
+const shareValidation = [
+  //Name should not be empty
+  body('email').not().isEmpty().withMessage("Email is required."),
+];
   
-module.exports = { registerValidation, loginValidation, changePassValidation, addInventoryValidation, addItemValidation };
+module.exports = { registerValidation, loginValidation, changePassValidation, inventoryValidation, itemValidation, shareValidation };
 

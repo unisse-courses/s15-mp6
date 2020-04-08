@@ -31,14 +31,34 @@
     <div id="grid_container">
         {{#if inventories}}
             {{#each inventories}}
-                <div class = "inventory" id=>
+                <div class = "inventory">
                     <table>
                         <tr>
-                            <th colspan = "2"><form action = "/itemlist" method='POST'><input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'><input type="image" src="img/default.jpg" class="inventory_image" alt="Submit" ></form></th>
+                            <th colspan = "2">
+                                <form action = "/itemlist" method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <input type="image" src="img/default.jpg" class="inventory_image" alt="Submit" >
+                                </form>
+                            </th>
                         </tr>
                         <tr>
                             <td class="inventory_name">{{ this.name }}</td>  
-                            <td><button id="options">...</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span><form action='/share' method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <button class="options" name='Share'>Share</button>
+                                </form></span>
+                                <span><form action='/editinventory' method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <button class="options" name='Edit'>Edit</button>
+                                </form></span>
+                                <span><form action='/deleteinventory' method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <button class="options" name='Delete'>Delete</button>
+                                </form></span>
+                            </td>
                         </tr>
                     </table>
                 </div>

@@ -1,5 +1,4 @@
 const mongoose = require('./connection');
-const itemModel = require('../models/item');
 const multer = require('multer');
 const fs = require('fs');
 
@@ -7,7 +6,6 @@ const inventorySchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, default: 'No Description' },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Items' }],
-    total: { type: Number, default: 0},
     image: { data: Buffer, contentType: String }
   }
 );
@@ -35,16 +33,31 @@ exports.getOne = function(query, next) {
 };
 
 exports.addItem = function(id, item, next) {
-    const quantity = item.quantity;
     Inventory.findOneAndUpdate({_id: id}, { $push: {items: item} }, function(err, inventory) {
-        Inventory.findOneAndUpdate({_id: id}, { total: inventory.total + quantity }, function(err, inventory) {
-            next(err, inventory);
-        });
+        next(err, inventory);
     });
 };
 
 exports.checkItem = function(id, name, next) {
     Inventory.find({$elemMatch: {_id: id, items: {name: name}}}, function(err, inventory) {
         next(err, inventory);
+    });
+};
+
+exports.deleteItem = function(id, itemId, next) {
+    Inventory.findOneAndUpdate({_id: id}, { $pull: { items: {_id: itemId} } }, function(err, inventory) {
+        next(err, inventory);
+    });
+};
+
+exports.updateOne = function(id, updatedInventory, next) {
+    Inventory.findOneAndUpdate({_id: id}, { name: updatedInventory.name, description: updatedInventory.description }, function(err, inventory) {
+        next(err, inventory);
+    });
+};
+
+exports.deleteOne = function(id, next) {
+    Inventory.deleteOne({_id: id}, function(err,res) {
+        next(err);
     });
 };
