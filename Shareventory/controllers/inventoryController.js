@@ -1,5 +1,6 @@
 const inventoryModel = require('../models/inventory');
 const userModel = require('../models/user');
+const itemModel = require('../models/item');
 const { validationResult } = require('express-validator');
 
 exports.addInventory = (req, res) => {
@@ -101,14 +102,23 @@ exports.deleteInventory = (req,res) => {
                     req.flash('error_msg', 'Could not delete inventory. Please try again.');
                     res.redirect('/myinventory');
                 } else {
-                    inventoryModel.deleteOne(inventoryId, (err) => {
-                        if (err) {
-                            req.flash('error_msg', 'Could not delete inventory. Please try again.');
-                            res.redirect('/myinventory');
-                        } else {
-                            req.flash('success_msg', 'Inventory deleted.');
-                            res.redirect('/myinventory');
-                        }
+                    inventoryModel.getById(inventoryId, (err, inventory) => {
+                        itemModel.deleteItems(inventory, (err) => {
+                            if (err) {
+                                req.flash('error_msg', 'Could not delete inventory. Please try again.');
+                                res.redirect('/myinventory');
+                            } else {
+                                inventoryModel.deleteOne(inventoryId, (err) => {
+                                    if (err) {
+                                        req.flash('error_msg', 'Could not delete inventory. Please try again.');
+                                        res.redirect('/myinventory');
+                                    } else {
+                                        req.flash('success_msg', 'Inventory deleted.');
+                                        res.redirect('/myinventory');
+                                    }
+                                });
+                            }
+                        });
                     });
                 }
             });

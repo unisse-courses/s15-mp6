@@ -37,7 +37,13 @@ exports.updateOne = function(id, updatedItem, next) {
 };
 
 exports.deleteOne = function(id, next) {
-    Item.deleteOne({_id: id}, function(err,res) {
-        next(err, res);
+    Item.deleteOne({_id: id}, function(err) {
+        next(err);
     });
 };
+
+exports.deleteItems = function(inventory, next) {
+    Item.deleteMany({_id: {$in: inventory.items}}, function(err) {
+        next(err);
+    })
+}
