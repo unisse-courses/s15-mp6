@@ -12,7 +12,7 @@ const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 
 const app = express();
-const port = 9090;
+const port = 3000;
 
 
 app.listen(port, ()=>{
