@@ -236,7 +236,7 @@ footer {
     display: grid;
     grid-template:  none/auto auto auto auto;
     grid-gap: 10px;
-    background-color: darkslategray;
+    background-color: transparent;
     padding: 10px;
 }
 
@@ -260,4 +260,8 @@ footer {
     border-color: black;
     padding: 5px 5px;
     max-width: 265px;
+}
+
+#message{
+    font-size: large;
 }
