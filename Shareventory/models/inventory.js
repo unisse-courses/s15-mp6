@@ -1,6 +1,4 @@
 const mongoose = require('./connection');
-const multer = require('multer');
-const fs = require('fs');
 
 const inventorySchema = new mongoose.Schema({
     name: { type: String, required: true },

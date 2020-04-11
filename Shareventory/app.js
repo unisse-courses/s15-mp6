@@ -7,6 +7,7 @@ const mongoose = require('./models/connection');
 const session = require('express-session');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session);
+const methodOverride = require('method-override');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
@@ -19,6 +20,7 @@ app.listen(port, ()=>{
     console.log('Server started at port ' + port);
 });
 
+app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, "/views/"));
 
 app.engine("hbs", exphbs({
@@ -53,5 +55,5 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/', authRouter); // Login/registration/settings routes
+app.use('/', authRouter); 
 app.use('/', indexRouter); // Main index route
