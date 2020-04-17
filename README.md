@@ -2,6 +2,11 @@
 
 # Shareventory
 
+# How to Run
+* Run mongo database
+* Install npm
+* Run app.js
+
 ## Team Members:
 
 * Kim, Haneul
