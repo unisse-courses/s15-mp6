@@ -51,6 +51,7 @@ router.get('/myinventory', function(req, res) {
               }
             })
         }
+        console.log(inventoryList);
         res.render('myinventory', {
           layout: 'main2',
           pageTitle: 'My Inventory',
