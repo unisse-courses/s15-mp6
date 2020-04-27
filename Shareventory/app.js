@@ -8,12 +8,13 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
+const { envPort, sessionKey } = require('./config');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 
 const app = express();
-const port = 3000;
+const port = envPort || 3000;
 
 
 app.listen(port, ()=>{
@@ -40,7 +41,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-    secret: 'somegibberishsecret',
+    secret: sessionKey,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
     saveUninitialized: true,

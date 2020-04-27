@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const databaseURL = 'mongodb://localhost:27017/Shareventory';
+const { dbURL } = require('../config');
 
 const options = { useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false };
 
-mongoose.connect(databaseURL, options, (error)=>{
+mongoose.connect(dbURL, options, (error)=>{
     if(!error){
         console.log("Success Connected");
     }
