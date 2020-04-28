@@ -44,14 +44,14 @@ exports.addInventory = function(id, inventory, next) {
   });
 };
 
-exports.checkInventory = function(id, name, next) {
-  User.find({$elemMatch: {_id: id, inventories: {name: name}}}, function(err, user) {
+exports.checkInventories = function(id, inventories, next) {
+  User.find({ _id: id, inventories: { $in: inventories }}, function(err, user) {
       next(err, user);
   });
 };
 
 exports.deleteInventory = function(id, inventoryId, next) {
-  User.findOneAndUpdate({_id: id}, { $pull: { inventories: {_id: inventoryId} } }, function(err, user) {
+  User.findOneAndUpdate({_id: id}, { $pull: { inventories: inventoryId } }, function(err, user) {
     next(err, user);
   });
 };
@@ -62,8 +62,14 @@ exports.addSharedInventory = function(id, inventory, next) {
   });
 };
 
+exports.checkSharedInventory = function(id, inventory, next) {
+  User.findOne({ _id: id, shared: inventory}, function(err, user) {
+      next(err, user);
+  });
+};
+
 exports.deleteSharedInventory = function(inventoryId, next) {
-  User.updateMany({shared: {_id: inventoryId}}, { $pull: { shared: {_id: inventoryId} } }, function(err, user) {
+  User.updateMany({shared: {_id: inventoryId}}, { $pull: { shared:  inventoryId } }, function(err, user) {
     next(err, user);
   });
 };

@@ -27,6 +27,7 @@ router.get('/settings', isPrivate, (req, res) => {
   res.render('settings', {
     layout: 'main2',
     pageTitle: 'Settings',
+    user: req.session.name
   });
 });
 
@@ -51,11 +52,14 @@ router.get('/myinventory', function(req, res) {
               }
             })
         }
-        res.render('myinventory', {
-          layout: 'main2',
-          pageTitle: 'My Inventory',
-          inventories: inventoryList
-        })
+        setTimeout(function afterOneSecond() {
+          res.render('myinventory', {
+            layout: 'main2',
+            pageTitle: 'My Inventory',
+            inventories: inventoryList,
+            user: req.session.name
+          })
+        }, 1000)
     }
   })
 });
@@ -70,7 +74,8 @@ router.get('/editinventory', function(req, res) {
       res.render('editinventory', {
         layout: 'main2',
         pageTitle: 'My Inventory',
-        inventory: inventory.toObject()
+        inventory: inventory.toObject(),
+        user: req.session.name
       })
     }
   })
@@ -97,11 +102,14 @@ router.get('/sharedinventory', function(req, res) {
               }
             })
         }
-        res.render('sharedinventory', {
-          layout: 'main2',
-          pageTitle: 'Shared Inventory',
-          inventories: inventoryList
-        })
+        setTimeout(function afterOneSecond() {
+          res.render('sharedinventory', {
+            layout: 'main2',
+            pageTitle: 'Shared Inventory',
+            inventories: inventoryList,
+            user: req.session.name
+          })
+        }, 1000)
     }
   })
 });
@@ -129,13 +137,16 @@ router.get('/itemlist', function(req, res) {
                 }
               });
           }
-          res.render('itemlist', {
-            layout: 'main2',
-            pageTitle: 'Item List',
-            items: itemList,
-            name: name,
-            description: description
-        });
+          setTimeout(function afterOneSecond() {
+            res.render('itemlist', {
+              layout: 'main2',
+              pageTitle: 'Item List',
+              items: itemList,
+              name: name,
+              description: description,
+              user: req.session.name
+            })
+          }, 1000)
       }
   });
 });
@@ -150,20 +161,19 @@ router.get('/edititem', function(req, res) {
       res.render('edititem', {
         layout: 'main2',
         pageTitle: 'My Inventory',
-        item: item.toObject()
+        item: item.toObject(),
+        user: req.session.name
       });
     }
   });
 });
 
 //Shared Item List route
-router.get('/itemlist', function(req, res) {
+router.get('/shareditemlist', function(req, res) {
   inventoryModel.getById(req.session.inventory, (err, inventory) => {
-    inventoryModel.getTotal(req.session.inventory, (err, total) => {
       const itemList = [];
       const name = inventory.name;
       const description = inventory.description;
-      const totalQuantity = total;
 
       if (err) {
         // Database error occurred...
@@ -181,16 +191,17 @@ router.get('/itemlist', function(req, res) {
                 }
               });
           }
-          res.render('itemlist', {
-            layout: 'main2',
-            pageTitle: 'Item List',
-            items: itemList,
-            name: name,
-            description: description,
-            total: totalQuantity
-        });
+          setTimeout(function afterOneSecond() {
+            res.render('shareditemlist', {
+              layout: 'main2',
+              pageTitle: 'Item List',
+              items: itemList,
+              name: name,
+              description: description,
+              user: req.session.name
+            });
+          }, 1000)
       }
-    });
   });
 });
 
@@ -203,7 +214,8 @@ router.get('/share', function(req,res) {
       layout: 'main2',
       pageTitle: 'My Inventory',
       name: name,
-      inventoryId: req.session.inventory
+      inventoryId: req.session.inventory,
+      user: req.session.name
     });
   });
 });

@@ -36,14 +36,14 @@ exports.addItem = function(id, item, next) {
     });
 };
 
-exports.checkItem = function(id, name, next) {
-    Inventory.find({$elemMatch: {_id: id, items: {name: name}}}, function(err, inventory) {
+exports.checkItems = function(id, items, next) {
+    Inventory.find({ _id: id, items: { $in: items }}, function(err, inventory) {
         next(err, inventory);
     });
-};
+  };
 
 exports.deleteItem = function(id, itemId, next) {
-    Inventory.findOneAndUpdate({_id: id}, { $pull: { items: {_id: itemId} } }, function(err, inventory) {
+    Inventory.findOneAndUpdate({_id: id}, { $pull: { items:  itemId } }, function(err, inventory) {
         next(err, inventory);
     });
 };
@@ -57,5 +57,11 @@ exports.updateOne = function(id, updatedInventory, next) {
 exports.deleteOne = function(id, next) {
     Inventory.deleteOne({_id: id}, function(err,res) {
         next(err);
+    });
+};
+
+exports.getMany = function(name, next) {
+    Inventory.find({name: name}, function(err, inventories) {
+        next(err, inventories);
     });
 };

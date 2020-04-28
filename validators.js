@@ -12,8 +12,7 @@ const registerValidation = [
   body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long."),
 
   // Confirm Password needs to be min 6 chars AND must match the req.body.password field
-  body('confirmPass').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long.")
-    .custom((value, { req }) => {
+  body('confirmPass').custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Passwords must match.");
       }
@@ -37,8 +36,7 @@ const changePassValidation = [
   body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long."),
 
   // Confirm Password needs to be min 6 chars AND must match the req.body.password field
-  body('confirmPass').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long.")
-    .custom((value, { req }) => {
+  body('confirmPass').custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Passwords must match.");
       }

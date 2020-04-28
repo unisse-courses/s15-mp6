@@ -8,7 +8,6 @@
     <div id="controls">
         <div>
             <h2 id="header">List of Items</h2>
-            <p>Total No. of Items: <span id="total">{{ total }}</span></p>
         </div>
     </div>
 
@@ -24,7 +23,7 @@
                     </div>
                 {{/each}}
             {{else}}
-                <p>No items yet</p>
+                <div id="message"><p>No items yet</p></div>
             {{/if}}
         </div>
     </div>

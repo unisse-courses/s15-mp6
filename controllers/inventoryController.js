@@ -8,33 +8,40 @@ exports.addInventory = (req, res) => {
 
     if (errors.isEmpty()) {
         const { name, description } = req.body;
-    
-        userModel.checkInventory( req.session.user, { name: name }, (err, result) => {
-            if (result) {
-                // found a match, return to login with error
-                req.flash('error_msg', 'Inventory name already exists.');
+
+        inventoryModel.getMany( name, (err, inventories) => {
+            if (!inventories) {
+                req.flash('success_msg', 'New inventory created.');
                 res.redirect('/myinventory');
             } else {
-                const newInventory = {
-                    name: name,
-                    description: description,
-                };
-                inventoryModel.create(newInventory, (err, inventory) => {
-                    if (err) {
-                        req.flash('error_msg', 'Could not create inventory. Please try again.');
+                userModel.checkInventories(req.session.user, inventories, (err, user) => {
+                    if (user.length != 0) {
+                        // found a match, return to login with error
+                        req.flash('error_msg', 'Inventory name already exists.');
                         res.redirect('/myinventory');
                     } else {
-                        userModel.addInventory(req.session.user, inventory, (err, user) => {
+                        const newInventory = {
+                            name: name,
+                            description: description,
+                        };
+                        inventoryModel.create(newInventory, (err, inventory) => {
                             if (err) {
                                 req.flash('error_msg', 'Could not create inventory. Please try again.');
                                 res.redirect('/myinventory');
                             } else {
-                                req.flash('success_msg', 'New inventory created.');
-                                res.redirect('/myinventory');
+                                userModel.addInventory(req.session.user, inventory, (err, user) => {
+                                    if (err) {
+                                        req.flash('error_msg', 'Could not create inventory. Please try again.');
+                                        res.redirect('/myinventory');
+                                    } else {
+                                        req.flash('success_msg', 'New inventory created.');
+                                        res.redirect('/myinventory');
+                                    }
+                                })
                             }
-                        })
+                        });
                     }
-                });
+                })
             }
         });
     } else {
@@ -60,23 +67,30 @@ exports.updateInventory = (req,res) => {
     if (errors.isEmpty()) {
         const { name, description } = req.body;
 
-        userModel.checkInventory( req.session.user, { name: name }, (err, result) => {
-            if (result) {
-                // found a match, return to login with error
-                req.flash('error_msg', 'Inventory name already exists.');
-                res.redirect('/editinventory');
+        inventoryModel.getMany( name, (err, inventories) => {
+            if (!inventories) {
+                req.flash('success_msg', 'Inventory updated.');
+                res.redirect('/myinventory');
             } else {
-                const updatedInventory = {
-                    name: name,
-                    description: description
-                };
-                inventoryModel.updateOne(req.session.inventory, updatedInventory, (err, inventory) => {
-                    if (err) {
-                        req.flash('error_msg', 'Could not update inventory. Please try again.');
-                        res.redirect('/editinventory');
+                userModel.checkInventories(req.session.user, inventories, (err, user) => {
+                    if (user.length != 0) {
+                        // found a match, return to login with error
+                        req.flash('error_msg', 'Inventory name already exists.');
+                        res.redirect('/myinventory');
                     } else {
-                        req.flash('success_msg', 'Inventory updated.');
-                        res.redirect('/myinventory'); 
+                        const updatedInventory = {
+                            name: name,
+                            description: description
+                        };
+                        inventoryModel.updateOne(req.session.inventory, updatedInventory, (err, inventory) => {
+                            if (err) {
+                                req.flash('error_msg', 'Could not update inventory. Please try again.');
+                                res.redirect('/editinventory');
+                            } else {
+                                req.flash('success_msg', 'Inventory updated.');
+                                res.redirect('/myinventory'); 
+                            }
+                        });
                     }
                 });
             }
@@ -150,22 +164,34 @@ exports.shareInventory = (req,res) => {
                 // Successful query
                 if (user) {
                     // User found!
-                    inventoryModel.getById(inventoryId, (err, inventory) => {
-                        if (err) {
-                            req.flash('error_msg', 'Could not create inventory. Please try again.');
-                            res.redirect('/share');
-                        } else {
-                            userModel.addSharedInventory(user, inventory, (err, user) => {
-                                if (err) {
-                                    req.flash('error_msg', 'Could not share inventory. Please try again.');
-                                    res.redirect('/share');
-                                } else {
-                                    req.flash('success_msg', 'Inventory shared.');
-                                    res.redirect('/share');
-                                }
-                            })
-                        }
-                    });
+                    if (user._id == req.session.user) {
+                        req.flash('error_msg', 'You cannot share with yourself.');
+                        res.redirect('/share');
+                    } else {
+                        userModel.checkSharedInventory(user._id, inventoryId, (err, user) => {
+                            if (user) {
+                                req.flash('error_msg', 'Inventory already shared with user.');
+                                res.redirect('/share');
+                            } else {
+                                inventoryModel.getById(inventoryId, (err, inventory) => {
+                                    if (err) {
+                                        req.flash('error_msg', 'Could not create inventory. Please try again.');
+                                        res.redirect('/share');
+                                    } else {
+                                        userModel.addSharedInventory(user, inventory, (err, user) => {
+                                            if (err) {
+                                                req.flash('error_msg', 'Could not share inventory. Please try again.');
+                                                res.redirect('/share');
+                                            } else {
+                                                req.flash('success_msg', 'Inventory shared.');
+                                                res.redirect('/share');
+                                            }
+                                        })
+                                    }
+                                });
+                            }
+                        })
+                    }
                 } else {
                   // No user found
                   req.flash('error_msg', 'No registered user with that email.');

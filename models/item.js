@@ -30,6 +30,12 @@ exports.getOne = function(query, next) {
     });
 };
 
+exports.getMany = function(name, next) {
+    Item.find({name: name}, function(err, items) {
+        next(err, items);
+    });
+};
+
 exports.updateOne = function(id, updatedItem, next) {
     Item.findOneAndUpdate({_id: id}, { name: updatedItem.name, description: updatedItem.description, quantity: updatedItem.quantity }, function(err, item) {
         next(err, item);
