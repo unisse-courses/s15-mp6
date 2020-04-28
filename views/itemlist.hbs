@@ -55,13 +55,13 @@
                             <tr>
                                 <td><form action='/edititem' method='POST'>
                                     <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
-                                    <span><button class="options" name='Edit'>Edit</button></span>
+                                    <span><input type="image" src="img/edit.png" class="options" alt="Submit" ></span>
                                 </form></td>
                             </tr>
                             <tr>
                                 <td><form action='/deleteitem' method='POST'>
                                     <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
-                                    <span><button class="options" name='Delete'>Delete</button></span>
+                                    <span><input type="image" src="img/delete.png" class="options" alt="Submit" ></span>
                                 </form></td>
                             </tr>
                         </table>

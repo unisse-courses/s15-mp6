@@ -96,7 +96,7 @@ nav
     cursor: pointer;
     display: block;
     margin: auto;
-    background: rgb(140, 163, 247);
+    background: lightskyblue;
     border: 0;
     outline: none;
     border-radius: 30px;
@@ -104,16 +104,6 @@ nav
 
 #head{
     left: 50px;
-}
-
-#welcome_my
-{
-    float: left;
-    padding-left: 20px;
-    margin: 0;
-    color: white;
-    font-size: 30px;
-    margin-top: 30px;
 }
 
 .inventory_image{
@@ -145,9 +135,14 @@ nav
     border-radius: 15px;
 }
 
-footer {
+footer.container {
     position: fixed;
     bottom: 0;
+    left: 0;
+    right:0;
+    background-color: rgba(135,206,250,0.5);
+    width: 100%;
+    margin: 0;
   }
 
 .body {
@@ -192,6 +187,7 @@ footer {
     padding: 8px;
     margin: 8px;
     align-items: center;
+    border-radius: 4px;
 }
 
 .itemList img {
@@ -235,21 +231,23 @@ footer {
 
 #grid_container {
     display: grid;
-    grid-template:  none/auto auto auto auto;
+    grid-template-columns:  repeat(auto-fit, 260px);
     grid-gap: 10px;
     background-color: rgba(255,255,255,0.5);
     padding: 10px;
+    border-radius: 4px;
 }
 
 .options {
-    color:black;
     padding: 5px 5px;
+    margin-left: 5px;
     cursor: pointer;
     border: 1px solid black;
     outline: none;
     border-radius: 10px;
     float: right;
-    background-color: rgb(212, 212, 13);
+    width: 30px;
+    height: 30px;
 }
 
 .inventory_name {
@@ -261,6 +259,7 @@ footer {
     border-color: black;
     padding: 5px 5px;
     max-width: 265px;
+    border-radius: 4px;
 }
 
 #message{

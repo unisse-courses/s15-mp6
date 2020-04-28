@@ -46,17 +46,17 @@
                         </tr>
                         <tr>
                             <td>
+                                <span><form action='/deleteinventory' method='POST'>
+                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
+                                    <input type="image" src="img/delete.png" class="options" alt="Submit" >
+                                </form></span>
                                 <span><form action='/share' method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <button class="options" name='Share'>Share</button>
+                                    <input type="image" src="img/share.png" class="options" alt="Submit" >
                                 </form></span>
                                 <span><form action='/editinventory' method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <button class="options" name='Edit'>Edit</button>
-                                </form></span>
-                                <span><form action='/deleteinventory' method='POST'>
-                                    <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <button class="options" name='Delete'>Delete</button>
+                                    <input type="image" src="img/edit.png" class="options" alt="Submit" >
                                 </form></span>
                             </td>
                         </tr>
