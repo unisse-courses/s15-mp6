@@ -32,7 +32,7 @@ router.get('/settings', isPrivate, (req, res) => {
 });
 
 // My Inventory route
-router.get('/myinventory', function(req, res) {
+router.get('/myinventory', isPrivate, function(req, res) {
   userModel.getById(req.session.user, (err, user) => {
     const inventoryList = [];
 
@@ -65,7 +65,7 @@ router.get('/myinventory', function(req, res) {
 });
 
 //Edit Inventory route
-router.get('/editinventory', function(req, res) {
+router.get('/editinventory', isPrivate, function(req, res) {
   inventoryModel.getById(req.session.inventory, (err, inventory) => {
     if (err) {
       // Database error occurred...
@@ -82,7 +82,7 @@ router.get('/editinventory', function(req, res) {
 });
 
 // Shared Inventory route
-router.get('/sharedinventory', function(req, res) {
+router.get('/sharedinventory', isPrivate, function(req, res) {
   userModel.getById(req.session.user, (err, user) => {
     const inventoryList = [];
 
@@ -115,7 +115,7 @@ router.get('/sharedinventory', function(req, res) {
 });
 
 // Item List route
-router.get('/itemlist', function(req, res) {
+router.get('/itemlist', isPrivate, function(req, res) {
   inventoryModel.getById(req.session.inventory, (err, inventory) => {
       const itemList = [];
       const name = inventory.name;
@@ -152,7 +152,7 @@ router.get('/itemlist', function(req, res) {
 });
 
 //Edit Item route
-router.get('/edititem', function(req, res) {
+router.get('/edititem', isPrivate, function(req, res) {
   itemModel.getById(req.session.item, (err, item) => {
     if (err) {
       // Database error occurred...
@@ -169,7 +169,7 @@ router.get('/edititem', function(req, res) {
 });
 
 //Shared Item List route
-router.get('/shareditemlist', function(req, res) {
+router.get('/shareditemlist', isPrivate, function(req, res) {
   inventoryModel.getById(req.session.inventory, (err, inventory) => {
       const itemList = [];
       const name = inventory.name;
@@ -206,7 +206,7 @@ router.get('/shareditemlist', function(req, res) {
 });
 
 //Share route
-router.get('/share', function(req,res) {
+router.get('/share', isPrivate, function(req,res) {
   inventoryModel.getById(req.session.inventory, (err,inventory) => {
     const name = inventory.name;
 
