@@ -46,26 +46,30 @@
         <div id="list">
             {{#if items}}
                 {{#each items}}
-                    <div class = "itemList">
-                        <span class = 'imagecol'><image src='img/default.jpg'></span>
-                        <span class = 'namecol'>{{ this.name }}</span>
-                        <span class = 'itemcol'>{{ this.description }}</span>
-                        <span class = 'quantitycol'>{{ this.quantity }}</span>
-                        <table>
-                            <tr>
-                                <td><form action='/edititem' method='POST'>
-                                    <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
-                                    <span><input type="image" src="img/edit.png" class="options" alt="Submit" ></span>
-                                </form></td>
-                            </tr>
-                            <tr>
-                                <td><form action='/deleteitem' method='POST'>
-                                    <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
-                                    <span><input type="image" src="img/delete.png" class="options" alt="Submit" ></span>
-                                </form></td>
-                            </tr>
-                        </table>
-                    </div>
+                    <table class = "itemList">
+                        <tr>
+                            <td class = 'imagecol'><image src='img/default.jpg'></td>
+                            <td class = 'namecol'>{{ this.name }}</td>
+                            <td class = 'itemcol'>{{ this.description }}</td>
+                            <td class = 'quantitycol'>{{ this.quantity }}</td>
+                            <td class = 'optionscol'>
+                                <table>
+                                    <tr>
+                                        <td><form action='/edititem' method='POST'>
+                                            <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
+                                            <span><input type="image" src="img/edit.png" class="options" alt="Submit" ></span>
+                                        </form></td>
+                                    </tr>
+                                    <tr>
+                                        <td><form action='/deleteitem' method='POST'>
+                                            <input type='hidden' name='itemId' id="itemId" value='{{ this._id }}'>
+                                            <span><input type="image" src="img/delete.png" class="options" alt="Submit" ></span>
+                                        </form></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                 {{/each}}
             {{else}}
                 <div id="message"><p>No items yet</p></div>

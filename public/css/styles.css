@@ -188,6 +188,11 @@ footer.container {
     margin: 8px;
     align-items: center;
     border-radius: 4px;
+    table-layout: fixed;
+}
+
+.itemList td {
+    overflow-wrap: break-word;
 }
 
 .itemList img {
@@ -202,17 +207,25 @@ footer.container {
 }
 
 .namecol {
-    width: 20%;
+    width: 200px;
+    max-width: 200px;
 }
 
 .itemcol {
-    width: 60%;
+    width: 600px;
+    max-width: 600px;
 }
 
 .quantitycol {
-    width: 10%;
+    width: 80px;
     text-align: center;
     font-weight: 700;
+    max-width: 80px;
+}
+
+.optionscol {
+    width: 50px;
+    text-align: right;
 }
 
 .error {
