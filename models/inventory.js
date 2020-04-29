@@ -4,7 +4,7 @@ const inventorySchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, default: 'No Description' },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Items' }],
-    image: { data: Buffer, contentType: String }
+    file: { type: String }
   }
 );
 

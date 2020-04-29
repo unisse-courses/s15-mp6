@@ -3,7 +3,8 @@ const { dbURL } = require('../config');
 
 const options = { useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false };
+  useFindAndModify: false
+};
 
 mongoose.connect(dbURL, options, (error)=>{
     if(!error){

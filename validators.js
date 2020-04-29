@@ -46,7 +46,9 @@ const changePassValidation = [
 
 const inventoryValidation = [
   //Name should not be empty
-  body('name').not().isEmpty().withMessage("Name is required.")
+  body('name').not().isEmpty().withMessage("Name is required."),
+  //Name should have maximum 30 characters
+  body('name').isLength({ max: 30 }).withMessage("Name should have maximum 30 characters only.")
 ];
 
 const itemValidation = [
