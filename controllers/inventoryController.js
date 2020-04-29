@@ -7,7 +7,7 @@ exports.addInventory = (req, res) => {
     const errors = validationResult(req);
 
     if (errors.isEmpty()) {
-        const { name, description } = req.body;
+        const { name, description, category } = req.body;
 
         inventoryModel.getMany( name, (err, inventories) => {
             if (!inventories) {
@@ -22,7 +22,8 @@ exports.addInventory = (req, res) => {
                     } else {
                         const newInventory = {
                             name: name,
-                            description: description,
+                            category: category,
+                            description: description
                         };
                         inventoryModel.create(newInventory, (err, inventory) => {
                             if (err) {
@@ -65,7 +66,7 @@ exports.updateInventory = (req,res) => {
     const errors = validationResult(req);
 
     if (errors.isEmpty()) {
-        const { name, description } = req.body;
+        const { name, description, category } = req.body;
 
         inventoryModel.getMany( name, (err, inventories) => {
             if (!inventories) {
@@ -80,6 +81,7 @@ exports.updateInventory = (req,res) => {
                     } else {
                         const updatedInventory = {
                             name: name,
+                            category: category,
                             description: description
                         };
                         inventoryModel.updateOne(req.session.inventory, updatedInventory, (err, inventory) => {
@@ -173,9 +175,9 @@ exports.shareInventory = (req,res) => {
                                 req.flash('error_msg', 'Inventory already shared with user.');
                                 res.redirect('/share');
                             } else {
-                                inventoryModel.getById(inventoryId, (err, inventory) => {
+                                inventoryModel.addEmail(inventoryId, email, (err, inventory) => {
                                     if (err) {
-                                        req.flash('error_msg', 'Could not create inventory. Please try again.');
+                                        req.flash('error_msg', 'Could not share inventory. Please try again.');
                                         res.redirect('/share');
                                     } else {
                                         userModel.addSharedInventory(user, inventory, (err, user) => {
@@ -205,4 +207,25 @@ exports.shareInventory = (req,res) => {
         req.flash('error_msg', messages.join(' '));
         res.redirect('/share');
     }
+};
+
+exports.removeEmail = (req,res) => {
+    const { sharedEmail } = req.body;
+
+    userModel.deleteSharedInventory(req.session.inventory, (err, user) => {
+        if (err) {
+            req.flash('error_msg', 'Could not unshare inventory. Please try again.');
+            res.redirect('/share');
+        } else {
+            inventoryModel.deleteEmail(req.session.inventory, sharedEmail, (err, inventory) => {
+                if (err) {
+                    req.flash('error_msg', 'Could not unshare inventory. Please try again.');
+                    res.redirect('/share');
+                } else {
+                    req.flash('success_msg', 'Inventory unshared from user.');
+                    res.redirect('/share');
+                }
+            });
+        }
+    });
 };

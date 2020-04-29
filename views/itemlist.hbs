@@ -7,29 +7,26 @@
     <form id="form" action="/addItem" method="POST">
         <table>
             <tr>
-                <th colspan="4" style="border-bottom: 2px solid #aaa"><h2><strong>Add Item</strong></h2></th>
+                <th colspan="2" style="border-bottom: 2px solid #aaa"><h2><strong>Add Item</strong></h2></th>
             </tr>
             <tr><td><br></td></tr>
             <tr>
                 <td><label for="name">Name</label></td>
                 <td><input type="text" name="name" id="name"></td>
-
-                <td><label for="file">Image</label></td>
-                <td><input type="file" name="file" id="file" accept="image/*">
-                </td>
             </tr>
             <tr>
-                <td><label for="description">Description</label></td>
-                <td><input type="text" name="description" id="description"></td>
-
                 <td><label for="quantity">Quantity</label></td>
                 <td><input type="number" name="quantity" id="quantity"></td>
             </tr>
             <tr>
-                <td colspan="4">{{> messages}}</td>
+                <td><label for="description">Description</label></td>
+                <td><textarea type="text" name="description" id="description" rows="3"></textarea></td>
             </tr>
             <tr>
-                <td colspan="4">
+                <td colspan="2" style="text-align: center">{{> messages}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
                     <button name = "submit" id = "submit" value = "Add">Add</button>
                 </td>
             </tr>
@@ -48,7 +45,6 @@
                 {{#each items}}
                     <table class = "itemList">
                         <tr>
-                            <td class = 'imagecol'><image src='img/default.jpg'></td>
                             <td class = 'namecol'>{{ this.name }}</td>
                             <td class = 'itemcol'>{{ this.description }}</td>
                             <td class = 'quantitycol'>{{ this.quantity }}</td>

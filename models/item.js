@@ -3,8 +3,7 @@ const mongoose = require('./connection');
 const itemSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, default: 'No Description.' },
-    quantity: { type: Number, required: true, min: 0 },
-    image: { data: Buffer, contentType: String }
+    quantity: { type: Number, required: true, min: 0 }
   }
 );
 

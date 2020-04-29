@@ -209,11 +209,13 @@ router.get('/shareditemlist', isPrivate, function(req, res) {
 router.get('/share', isPrivate, function(req,res) {
   inventoryModel.getById(req.session.inventory, (err,inventory) => {
     const name = inventory.name;
+    const sharedEmails = inventory.sharedEmails;
 
     res.render('share', {
       layout: 'main2',
       pageTitle: 'My Inventory',
       name: name,
+      sharedEmails: sharedEmails,
       inventoryId: req.session.inventory,
       user: req.session.name
     });
@@ -236,7 +238,8 @@ router.post('/deleteitem', isPrivate, itemController.deleteItem);
 router.post('/sharedinventory', isPrivate);
 router.post('/shareditemlist', isPrivate, itemController.setSharedInventory);
 router.post('/share', isPrivate, inventoryController.setSharedInventory);
-router.post('/shareInventory', isPrivate, shareValidation, inventoryController.shareInventory)
+router.post('/shareInventory', isPrivate, shareValidation, inventoryController.shareInventory);
+router.post('/removeEmail', isPrivate, inventoryController.removeEmail);
 
 // logout
 router.get('/logout', isPrivate, userController.logoutUser);

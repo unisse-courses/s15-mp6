@@ -3,26 +3,39 @@
     <form id="form" action="/updateInventory" method="POST">
         <table>
             <tr>
-                <td colspan="4" style="border-bottom: 2px solid #aaa"><strong>Edit Inventory</strong>
-                </td>
+                <th colspan="4" style="border-bottom: 2px solid #aaa"><h2><strong>Edit Inventory</strong></h2></th>
             </tr>
+            <tr><td><br></td></tr>
             <tr>
                 <td><label for="name">Name</label></td>
-                <td><input type="text" name="name" id="name" value="{{ inventory.name }}"></td>
+                <td><input type="text" name="name" id="name" value="{{ this.name }}"></td>
             <tr>
-                <td><label for="image">Image</label></td>
-                <td><input type="file" name="image" id="image" accept="image/*">
+                <td><label for="category">Category</label></td>
+                <td>
+                    <select name="category" id="category">
+                        <option value="animal">Animals/ Pets</option>
+                        <option value="clothing">Clothing/ Accessories</option>
+                        <option value="food">Food</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="medicine">Medicine/ Health</option>
+                        <option value="nature">Nature</option>
+                        <option value="recreational">Recreational/ Hobbies</option>
+                        <option value="school">School</option>
+                        <option value="technology">Technology</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="others" selected="selected">Others</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td><label for="description">Description</label></td>
-                <td><input type="text" name="description" id="description" value="{{ inventory.description }}"></td>
+                <td><textarea type="text" name="description" id="description" rows="3" value="{{ this.description}}"></textarea></td>
             </tr>
             <tr>
-                <td colspan="4">{{> messages}}</td>
+                <td colspan="2" style="text-align: center">{{> messages}}</td>
             </tr>
             <tr>
-                <td colspan="4">
+                <td colspan="2">
                     <button name = "submit" id = "submit" value = "Update">Update</button>
                 </td>
             </tr>

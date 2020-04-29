@@ -2,9 +2,10 @@ const mongoose = require('./connection');
 
 const inventorySchema = new mongoose.Schema({
     name: { type: String, required: true },
+    category: { type: String, required: true },
     description: { type: String, default: 'No Description' },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Items' }],
-    file: { type: String }
+    sharedEmails: [{ type: String }]
   }
 );
 
@@ -44,6 +45,18 @@ exports.checkItems = function(id, items, next) {
 
 exports.deleteItem = function(id, itemId, next) {
     Inventory.findOneAndUpdate({_id: id}, { $pull: { items:  itemId } }, function(err, inventory) {
+        next(err, inventory);
+    });
+};
+
+exports.addEmail = function(id, email, next) {
+    Inventory.findOneAndUpdate({_id: id}, { $push: {sharedEmails: email} }, function(err, inventory) {
+        next(err, inventory);
+    });
+};
+
+exports.deleteEmail = function(id, email, next) {
+    Inventory.findOneAndUpdate({_id: id}, { $pull: { sharedEmails:  email } }, function(err, inventory) {
         next(err, inventory);
     });
 };

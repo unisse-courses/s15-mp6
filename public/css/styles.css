@@ -199,7 +199,7 @@ footer.container {
 }
 
 .itemList {
-    min-height: 150px;
+    min-height: 100px;
     background-color: #eee;
     display: flex;
     padding: 8px;
@@ -213,25 +213,14 @@ footer.container {
     overflow-wrap: break-word;
 }
 
-.itemList img {
-    display: block;
-    margin: auto;
-    width: 150px;
-    max-height: 150px;
-}
-
-.imagecol{
-    width:auto;
-}
-
 .namecol {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
 }
 
 .itemcol {
-    width: 600px;
-    max-width: 600px;
+    width: 700px;
+    max-width: 700px;
 }
 
 .quantitycol {
@@ -292,6 +281,7 @@ footer.container {
     padding: 5px 5px;
     max-width: 265px;
     border-radius: 4px;
+    background-color:  rgba(255,255,255,0.5);
 }
 
 #message{
