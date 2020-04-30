@@ -1,7 +1,7 @@
 <div class = "body">
     <div>
-        <h3>{{ name }}</h3>
-        <p>{{ description }}</p>
+        <h2>{{ name }}</h2>
+        <h4>{{ description }}</h4>
         <br>
     </div>
 
@@ -16,7 +16,6 @@
             {{#if items}}
                 {{#each items}}
                     <div class = "itemList">
-                        <span class = 'imagecol'><image src='img/default.jpg'></span>
                         <span class = 'namecol'>{{ this.name }}</span>
                         <span class = 'itemcol'>{{ this.description }}</span>
                         <span class = 'quantitycol'>{{ this.quantity }}</span>
@@ -27,4 +26,5 @@
             {{/if}}
         </div>
     </div>
+    <div><br><br><br></div>
 </div>

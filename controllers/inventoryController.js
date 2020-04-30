@@ -10,13 +10,12 @@ exports.addInventory = (req, res) => {
         const { name, description, category } = req.body;
 
         inventoryModel.getMany( name, (err, inventories) => {
-            if (!inventories) {
-                req.flash('success_msg', 'New inventory created.');
+            if (err) {
+                req.flash('error_msg', 'Could not create inventory. Please try again.');
                 res.redirect('/myinventory');
             } else {
                 userModel.checkInventories(req.session.user, inventories, (err, user) => {
                     if (user.length != 0) {
-                        // found a match, return to login with error
                         req.flash('error_msg', 'Inventory name already exists.');
                         res.redirect('/myinventory');
                     } else {
@@ -69,32 +68,38 @@ exports.updateInventory = (req,res) => {
         const { name, description, category } = req.body;
 
         inventoryModel.getMany( name, (err, inventories) => {
-            if (!inventories) {
-                req.flash('success_msg', 'Inventory updated.');
-                res.redirect('/myinventory');
+            if (err) {
+                req.flash('error_msg', 'Could not update inventory. Please try again.');
+                res.redirect('/editinventory');
             } else {
-                userModel.checkInventories(req.session.user, inventories, (err, user) => {
-                    if (user.length != 0) {
-                        // found a match, return to login with error
-                        req.flash('error_msg', 'Inventory name already exists.');
-                        res.redirect('/myinventory');
+                inventoryModel.getById(req.session.inventory, (err, inventory) => {
+                    if (err) {
+                        req.flash('error_msg', 'Could not update inventory. Please try again.');
+                        res.redirect('/editinventory');
                     } else {
-                        const updatedInventory = {
-                            name: name,
-                            category: category,
-                            description: description
-                        };
-                        inventoryModel.updateOne(req.session.inventory, updatedInventory, (err, inventory) => {
-                            if (err) {
-                                req.flash('error_msg', 'Could not update inventory. Please try again.');
+                        userModel.checkInventories(req.session.user, inventories, (err, user) => {
+                            if (user.length != 0 && inventory.name != name) {
+                                req.flash('error_msg', 'Inventory name already exists.');
                                 res.redirect('/editinventory');
                             } else {
-                                req.flash('success_msg', 'Inventory updated.');
-                                res.redirect('/myinventory'); 
+                                const updatedInventory = {
+                                    name: name,
+                                    category: category,
+                                    description: description
+                                };
+                                inventoryModel.updateOne(req.session.inventory, updatedInventory, (err, inventory) => {
+                                    if (err) {
+                                        req.flash('error_msg', 'Could not update inventory. Please try again.');
+                                        res.redirect('/editinventory');
+                                    } else {
+                                        req.flash('success_msg', 'Inventory updated.');
+                                        res.redirect('/myinventory'); 
+                                    }
+                                });
                             }
                         });
                     }
-                });
+                })
             }
         });
     } else {
@@ -180,8 +185,6 @@ exports.shareInventory = (req,res) => {
                                         req.flash('error_msg', 'Could not share inventory. Please try again.');
                                         res.redirect('/share');
                                     } else {
-                                        console.log(inventory._id);
-                                        console.log(user);
                                         userModel.addSharedInventory(user, inventory._id, (err, user) => {
                                             if (err) {
                                                 req.flash('error_msg', 'Could not share inventory. Please try again.');
