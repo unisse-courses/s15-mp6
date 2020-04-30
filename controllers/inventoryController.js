@@ -170,8 +170,8 @@ exports.shareInventory = (req,res) => {
                         req.flash('error_msg', 'You cannot share with yourself.');
                         res.redirect('/share');
                     } else {
-                        userModel.checkSharedInventory(user._id, inventoryId, (err, user) => {
-                            if (user) {
+                        userModel.checkSharedInventory(user._id, inventoryId, (err, val) => {
+                            if (val) {
                                 req.flash('error_msg', 'Inventory already shared with user.');
                                 res.redirect('/share');
                             } else {
@@ -180,7 +180,9 @@ exports.shareInventory = (req,res) => {
                                         req.flash('error_msg', 'Could not share inventory. Please try again.');
                                         res.redirect('/share');
                                     } else {
-                                        userModel.addSharedInventory(user, inventory, (err, user) => {
+                                        console.log(inventory._id);
+                                        console.log(user);
+                                        userModel.addSharedInventory(user, inventory._id, (err, user) => {
                                             if (err) {
                                                 req.flash('error_msg', 'Could not share inventory. Please try again.');
                                                 res.redirect('/share');
