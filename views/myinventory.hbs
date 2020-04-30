@@ -12,7 +12,7 @@
             <tr>
                 <td><label for="category">Category</label></td>
                 <td>
-                    <select name="category" id="category">
+                    <select name="category" id="category" style="border-radius: 4px">
                         <option value="animal">Animals/ Pets</option>
                         <option value="clothing">Clothing/ Accessories</option>
                         <option value="food">Food</option>
@@ -51,7 +51,7 @@
                             <th colspan = "2">
                                 <form action = "/itemlist" method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <input type="image" src="img/default.jpg" class="inventory_image" alt="Submit" >
+                                    <input type="image" src="img/{{ this.category }}.jpg" class="inventory_image" alt="Submit" >
                                 </form>
                             </th>
                         </tr>
@@ -62,15 +62,15 @@
                             <td>
                                 <span><form action='/deleteinventory' method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <input type="image" src="img/delete.png" class="options" alt="Submit" >
+                                    <input type="image" src="img/delete.jpg" class="options" alt="Submit" >
                                 </form></span>
                                 <span><form action='/share' method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <input type="image" src="img/share.png" class="options" alt="Submit" >
+                                    <input type="image" src="img/share.jpg" class="options" alt="Submit" >
                                 </form></span>
                                 <span><form action='/editinventory' method='POST'>
                                     <input type='hidden' name='inventoryId' id="inventoryId" value='{{ this._id }}'>
-                                    <input type="image" src="img/edit.png" class="options" alt="Submit" >
+                                    <input type="image" src="img/edit.jpg" class="options" alt="Submit" >
                                 </form></span>
                             </td>
                         </tr>
