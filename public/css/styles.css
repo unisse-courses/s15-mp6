@@ -12,6 +12,7 @@ nav
     position: sticky;
     top: 0;
     z-index: 1;
+    border-bottom: 1px solid gray;
 }
 
 .navigation
@@ -292,7 +293,7 @@ footer.container {
 
 .inventory {
     border: 1px solid;
-    border-color: black;
+    border-color: white;
     padding: 5px 5px;
     max-width: 265px;
     border-radius: 4px;
