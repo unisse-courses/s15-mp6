@@ -120,8 +120,9 @@ nav
 
 .inventory_image{
     object-fit: cover;
-    width: 250px;
+    width: 249px;
     height: 250px;
+    border-radius: 10px;
 }
 
 .tables:after {
@@ -145,6 +146,7 @@ footer.container {
     width: 100%;
     margin: 0;
     padding-bottom: 3px;
+    font-size: x-small;
   }
 
 .body {
@@ -170,8 +172,7 @@ footer.container {
     height: 30px;
     text-align: center;
     background-color: lightskyblue;
-    border-top-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-radius: 10px;
 }
 
 #form td {
@@ -296,8 +297,9 @@ footer.container {
     border-color: white;
     padding: 5px 5px;
     max-width: 265px;
-    border-radius: 4px;
+    border-radius: 10px;
     background-color:  rgba(255,255,255,1);
+    text-align: center;
 }
 
 #message{
