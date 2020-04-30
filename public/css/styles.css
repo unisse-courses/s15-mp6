@@ -304,3 +304,8 @@ footer.container {
     color: white;
     text-align: center;
 }
+
+.profile{
+    width: "30%";
+    height: "30%";
+}
