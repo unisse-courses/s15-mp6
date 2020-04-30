@@ -22,6 +22,15 @@ router.get('/register', isPublic, (req, res) => {
   });
 });
 
+// About page route
+router.get('/about', isPrivate, (req, res) => {
+  res.render('about', {
+    layout: 'main2',
+    pageTitle: 'About Page',
+    user: req.session.name
+  });
+});
+
 // Settings route
 router.get('/settings', isPrivate, (req, res) => {
   res.render('settings', {
