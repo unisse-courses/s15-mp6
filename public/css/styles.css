@@ -69,6 +69,16 @@ nav
     border-radius: 4px;
 }
 
+.form-box2{
+    width: 800px;
+    height: 570px;
+    position: relative;
+    margin: 5% auto;
+    background-color:rgba(255,255,255,0.8);
+    padding: 5px;
+    border-radius: 4px;
+}
+
 .input{
     text-align:center;
     top: 30px;
@@ -79,6 +89,19 @@ nav
 }
 
 .form-box input{
+    text-align:center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.form-box2 input{
     text-align:center;
     width: 100%;
     padding: 10px 0;
