@@ -306,6 +306,7 @@ footer.container {
 }
 
 .profile{
-    width: "30%";
-    height: "30%";
+    width: "200px";
+    height: "200px";
+    border: 1px solid;
 }
