@@ -32,7 +32,7 @@ nav
     text-decoration: none;
     text-align: center;
     padding: 5px 20px;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .navigation li.active a
@@ -287,6 +287,7 @@ footer.container {
 .inventory_name {
     float:left;
     color: black;
+    font-size: medium;
 }
 
 .inventory {
