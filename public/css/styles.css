@@ -229,24 +229,31 @@ footer.container {
     width: 250px;
     max-width: 250px;
     border-right: 1px solid lightslategray;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .itemcol {
-    width: 700px;
-    max-width: 700px;
+    width: 520px;
+    max-width: 520px;
     border-right: 1px solid lightslategray;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .quantitycol {
     width: 100px;
     text-align: center;
     font-weight: 700;
-    max-width: 80px;
+    max-width: 100px;
     border-right: 1px solid lightslategray;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .optionscol {
-    width: 30px;
+    width: 40px;
+    max-width: 40px;
     text-align: right;
 }
 
