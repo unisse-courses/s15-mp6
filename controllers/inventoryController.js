@@ -22,7 +22,8 @@ exports.addInventory = (req, res) => {
                         const newInventory = {
                             name: name,
                             category: category,
-                            description: description
+                            description: description,
+                            owner: req.session.name
                         };
                         inventoryModel.create(newInventory, (err, inventory) => {
                             if (err) {

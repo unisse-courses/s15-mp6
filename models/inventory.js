@@ -5,7 +5,8 @@ const inventorySchema = new mongoose.Schema({
     category: { type: String, required: true },
     description: { type: String, default: 'No Description' },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Items' }],
-    sharedEmails: [{ type: String }]
+    sharedEmails: [{ type: String }],
+    owner: {type: String}
   }
 );
 
