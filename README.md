@@ -3,9 +3,7 @@
 # Shareventory
 
 # How to Run
-* Run mongo database
-* Install npm
-* Run app.js
+* access the website at: http://shareventory.herokuapp.com/
 
 ## Team Members:
 
