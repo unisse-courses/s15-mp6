@@ -3,7 +3,8 @@
 # Shareventory
 
 # How to Run
-* access the website at: http://shareventory.herokuapp.com/
+* Online: access the website at: http://shareventory.herokuapp.com/
+* Locally: type "heroku local web" on cmd at the project folder
 
 ## Team Members:
 
